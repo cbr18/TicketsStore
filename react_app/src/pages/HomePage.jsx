@@ -11,10 +11,7 @@ const HomePage = () => {
   const [city, setCity] = useState({});
   const [cities, setCities] = useState([]);
 
-  const handleSubmit = async () => {
-    console.log(city);
-    return <Navigate to='/places'{...city.value} />
-  }
+
 
   useEffect(() => {
   const fetchCities = async () => {
@@ -36,15 +33,23 @@ const HomePage = () => {
 
       {isAuthenticated && <h1>Hello, {getUsername()}</h1>}
 
-      <Select
+
+        <Select
+        className="basic-single"
+        classNamePrefix="select"
         options={cities}
-        onChange={handleSubmit()}
-        
+        defaultValue={cities[0]}
         placeholder="Выберите город"
         isSearchable
-        value={city}
+        onChange={(newValue) => {
+          setCity(newValue); // Обновляем состояние выбранного города
+        }}
       />
+
+      {city.value && ( // Условно выводим навигацию с учетом значения города
+        <Navigate to={`/${city.value}`} />
       
+      )}
     </div>
   );
 };

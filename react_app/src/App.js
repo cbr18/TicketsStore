@@ -20,7 +20,7 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/events" element={ <EventsPage /> } />
         <Route path='addPlace' element={<AddPlacePage/>}/> 
-          <Route path='/:city'element = {<PlacesPage />}/>
+        <Route path='/:city'element = {<PlacesPage />}/>
       </Routes>
       </BrowserRouter>
       </div>
