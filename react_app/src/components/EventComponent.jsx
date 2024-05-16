@@ -1,19 +1,20 @@
 import React from "react";
 import axios from "axios";
 
-export default function PlaceComponent({ place }) {
-    const { id, name, city, address, capacity_standing: capacity_standing, capacity_seats } = place;
+export default function EventComponent({ event }) {
+    const { id, name, place, date, minAge, description } = event;
     return (
         <div>
             <h2>{name}</h2>
-            <p>City: {city}</p>
-            <p>Address: {address}</p>
-            <p>Capacity standings: {capacity_standing}</p>
-            <p>Capacity seats: {capacity_seats}</p>
+            <p>Place: {place.name}</p>
+            <p>Date: {date}</p>
+            <p>Address: {place.address}</p>
+            <p>Age limit: {minAge}</p>
+            <p>desc: {description}</p>
             <button
                 onClick={() => {
                     axios
-                        .delete(`http://localhost:8000/places/${id}`)
+                        .delete(`http://localhost:8000/events/${id}`)
                         .then((response) => {
                             console.log(response.data);
                         })

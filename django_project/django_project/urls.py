@@ -41,7 +41,7 @@ urlpatterns = [
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     path('api/register/', views.RegisterView.as_view(), name='auth_register'),
     path('admin/', admin.site.urls),
-    path('eventbycity/<str:city_name>/', views.EventByCityView.as_view(), name='event_by_city'),
+    path('eventsbycity/<str:city_name>/', views.EventByCityView.as_view(), name='event_by_city'),
     path('placesbycity/<str:city_name>/', views.PlaceByCityView.as_view(), name='place_by_city'),
 
 ]
