@@ -30,22 +30,13 @@ class TicketCategorySerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return TicketCategory.objects.create(**validated_data)
     
-class TicketSerializer(serializers.ModelSerializer):
-    categoryTo = TicketCategorySerializer(read_only=True)
-    userTo = serializers.PrimaryKeyRelatedField(read_only=True)
 
-    class Meta:
-        model = Ticket
-        fields = ('__all__')
-    
-    def create(self, validated_data):
-        return Ticket.objects.create(**validated_data)
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ('username',  'password')
+        # extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         user = User.objects.create_user(
@@ -54,6 +45,19 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+    
+
+class TicketSerializer(serializers.ModelSerializer):
+    categoryTo = TicketCategorySerializer(read_only=True)
+    userTo = UserSerializer(read_only=True)
+
+    class Meta:
+        model = Ticket
+        fields = ('__all__')
+    
+    def create(self, validated_data):
+        return Ticket.objects.create(**validated_data)
+    
     
 class CitySerializer(serializers.Serializer):
     value = serializers.CharField(max_length=100)

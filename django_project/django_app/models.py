@@ -5,7 +5,7 @@ class EventModel (models.Model):
     models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
     place = models.ForeignKey('Place', on_delete=models.PROTECT, null=True)
-    date = models.DateField()
+    date = models.DateTimeField()
     minAge = models.IntegerField(default=0)
     description = models.TextField(null = True)
 
@@ -41,7 +41,7 @@ class Ticket (models.Model):
     userTo = models.ForeignKey('User', on_delete=models.PROTECT, null=True)
 
     def __str__(self):
-        return self.categoryTo+self.userTo
+        return f"{self.categoryTo} + {self.userTo}"
     
 class User (AbstractUser):
     email = models.CharField(max_length=256, unique=True)

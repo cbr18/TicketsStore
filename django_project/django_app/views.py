@@ -4,8 +4,8 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
 from rest_framework.response import Response
-from .models import EventModel, Place, Ticket, User
-from .serializers import EventModelSerializer, PlaceSerializer, TicketSerializer, UserSerializer, CitySerializer
+from .models import *
+from .serializers import *
 from django.db.models import Count
 from rest_framework.views import APIView
 
@@ -36,6 +36,10 @@ class PlaceViewSet(viewsets.ModelViewSet):
 class TicketViewSet(viewsets.ModelViewSet):
     queryset = Ticket.objects.all()
     serializer_class = TicketSerializer
+
+class TicketCategoryViewSet(viewsets.ModelViewSet):
+    queryset = TicketCategory.objects.all()
+    serializer_class = TicketCategorySerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
